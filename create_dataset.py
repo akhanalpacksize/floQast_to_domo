@@ -59,6 +59,7 @@ def create_domo_dataset(name, description, schema_column, owner_id, owner_name, 
 
     if response.ok:
         json_res = json.loads(response.text)
+        print(json_res)
         data_set_id = json_res.get('id')
         logger.info(f"Created dataset '{name}' with ID {data_set_id}")
     else:
@@ -66,12 +67,13 @@ def create_domo_dataset(name, description, schema_column, owner_id, owner_name, 
         response.raise_for_status()
 
 
-def generate_dataset():
-    # GETS ACCESS TOKEN FOR DOMO TO CREATE DATASET
-    access_token = get_access_token()
-    # access_token = get_local_access_token()
 
-    # PATH TO CSV FILE
+def generate_dataset():
+    # # GETS ACCESS TOKEN FOR DOMO TO CREATE DATASET
+    # access_token = get_local_access_token()
+    # # access_token = get_local_access_token()
+    #
+    # # PATH TO CSV FILE
     csv_file_path = os.path.join(os.getcwd(), output_dir, Reconciliations)
 
     # GETS HEADER FOR CSV FILE
@@ -79,17 +81,18 @@ def generate_dataset():
 
     # GETS HEADER FOR DOMO DATASET
     schema_columns = generate_schema_columns(headers)
+    print(schema_columns)
 
-    # GIVES DATASET NAME AND EXTENSION
-    dataset_name = "FloQast_Checklist_V2"
-    dataset_description = "Contains data from FloQast"
-
-    try:
-        # CREATE DATASET FOR DOMO
-        create_domo_dataset(dataset_name, dataset_description, schema_columns,
-                            DATASET_OWNER_ID, DATA_SET_OWNER_NAME, access_token)
-    except requests.exceptions.RequestException as e:
-        logger.error(f"An error occurred while creating dataset '{dataset_name}': {e}")
+    # # GIVES DATASET NAME AND EXTENSION
+    # dataset_name = "FloQast_Checklist_V2"
+    # dataset_description = "Contains data from FloQast"
+    #
+    # try:
+    #     # CREATE DATASET FOR DOMO
+    #     create_domo_dataset(dataset_name, dataset_description, schema_columns,
+    #                         DATASET_OWNER_ID, DATA_SET_OWNER_NAME, access_token)
+    # except requests.exceptions.RequestException as e:
+    #     logger.error(f"An error occurred while creating dataset '{dataset_name}': {e}")
 
 
 generate_dataset()

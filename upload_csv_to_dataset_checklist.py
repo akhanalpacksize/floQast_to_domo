@@ -2,7 +2,7 @@ import csv
 import os
 import requests
 import logging
-from utils import get_access_token, send_email_error
+from utils import get_local_access_token, send_email_error
 # from utils import get_local_access_token, send_email_error
 from commons import output_dir, Checklist_file
 from config.env import BASE_URL, FloQast_Checklist_v2
@@ -64,13 +64,13 @@ def update_schema(name, updated_schema_column, token):
         logger.info(f"updated_schema '{name}' with ID {FloQast_Checklist_v2}")
     else:
         error_message = f"Failed to upload dataset '{name}' with status code {response.status_code}"
-        send_email_error(error_message)
+        # send_email_error(error_message)
         logger.error(f"Failed to upload dataset '{name}' with status code {response.status_code}")
         response.raise_for_status()
 
 
 def generate_update_schema():
-    access_token = get_access_token()
+    access_token = get_local_access_token()
     # access_token = get_local_access_token()
     csv_file_path = os.path.join(os.getcwd(), output_dir, Checklist_file)
 
@@ -84,7 +84,7 @@ def generate_update_schema():
         update_schema(dataset_name, updated_schema_column, access_token)
     except requests.exceptions.RequestException as e:
         error_message = f"An error occurred while creating dataset '{dataset_name}': {e}"
-        send_email_error(error_message)
+        # send_email_error(error_message)
         logger.error(f"An error occurred while creating dataset '{dataset_name}': {e}")
 
 
@@ -101,7 +101,7 @@ def upload_csv():
             csv_data = f.read().encode('utf-8')
 
         header = {
-            "Authorization": f"Bearer {get_access_token()}",
+            "Authorization": f"Bearer {get_local_access_token()}",
             # "Authorization": f"Bearer {get_local_access_token()}",
             "Content-Type": "text/csv",
         }
@@ -115,16 +115,16 @@ def upload_csv():
             else:
                 error_message = f'Error {response.status_code} for file {Checklist_file}: {response.text}'
                 logger.error(f'Error {response.status_code} for file {Checklist_file}: {response.text}')
-                send_email_error(error_message)
+                # send_email_error(error_message)
         except SSLError as e:
             error_message = "An SSLError occurred:", e
             logger.error("An SSLError occurred:", e)
-            send_email_error(error_message)
+            # send_email_error(error_message)
 
     else:
         error_message = f"CSV file {Checklist_file} not found in {output_dir} folder."
         logger.info(f"CSV file {Checklist_file} not found in {output_dir} folder.")
-        send_email_error(error_message)
+        # send_email_error(error_message)
 
 
 
