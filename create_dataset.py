@@ -68,8 +68,8 @@ def create_domo_dataset(name, description, schema_column, owner_id, owner_name, 
 
 def generate_dataset():
     # GETS ACCESS TOKEN FOR DOMO TO CREATE DATASET
-    access_token = get_access_token()
-    # access_token = get_local_access_token()
+    # access_token = get_access_token()
+    access_token = get_local_access_token()
 
     # PATH TO CSV FILE
     csv_file_path = os.path.join(os.getcwd(), output_dir, Reconciliations)
@@ -81,7 +81,7 @@ def generate_dataset():
     schema_columns = generate_schema_columns(headers)
 
     # GIVES DATASET NAME AND EXTENSION
-    dataset_name = "FloQast_Checklist_V2"
+    dataset_name = "FloQast_Recon_V2"
     dataset_description = "Contains data from FloQast"
 
     try:

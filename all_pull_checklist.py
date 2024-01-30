@@ -20,7 +20,7 @@ setup_logging(module_name="create_dataset")
 logger = logging.getLogger(__name__)
 
 start_date = datetime.datetime(2018, 9,1)
-end_date = datetime.datetime.now() - relativedelta(days=datetime.datetime.now().day)
+end_date = datetime.datetime.now()
 
 base_url = flo_base
 
@@ -36,9 +36,6 @@ def fetch_data_for_month(month, base_url, access_token):
         data = response.json()['data']
         flattened_data_list = json_to_dataframe(data)
         df = pd.DataFrame(flattened_data_list)
-        df["Month"] = month.strftime("%B")
-        df['Year'] = month.year
-        df = df[['Year', 'Month'] + [col for col in df.columns if col not in ['Year', 'Month']]]
         logger.info(f'Fetching data for {month.strftime("%B %Y")} for checklists')
         return df
     else:
@@ -72,53 +69,3 @@ def fetch_all_Checklists_data_parallel():
     logger.info(f'CSV created in {csv_file_path}')
 
 
-fetch_all_Checklists_data_parallel()
-generate_update_schema()
-upload_csv()
-
-
-# def fetch_all_CheckList_data():
-#     start_date = datetime.datetime(2018, 9, 1)
-#     end_date = datetime.datetime.now() - relativedelta(days=datetime.datetime.now().day)
-#     base_url = flo_base
-#
-#     all_dfs = []
-#     current_month = start_date
-#     while current_month <= end_date:
-#         url = f'{base_url}/checklists?filter[month]={current_month.strftime("%B")}&filter[year]={current_month.year}'
-#
-#         headers = {
-#             'x-api-key': access_token
-#         }
-#
-#         # Check if the current month is still within the desired range
-#         if current_month <= end_date:
-#             response = requests.get(url, headers=headers)
-#             if response.status_code == 200:
-#                 data = response.json()['data']
-#                 flattened_data_list = json_to_dataframe(data)
-#                 df = pd.DataFrame(flattened_data_list)
-#                 df["Month"] = current_month.strftime("%B")
-#                 df['Year'] = current_month.year
-#                 df = df[['Year', 'Month'] + [col for col in df.columns if col not in ['Year', 'Month']]]
-#                 all_dfs.append(df)
-#                 logger.info(f'Fetching data for {current_month.strftime("%B %Y")} for checklist')
-#             else:
-#                 print(response.status_code)
-#         current_month = current_month + relativedelta(months=1)
-#     print(all_dfs)
-#
-#     # Move these lines outside the loop to create the folder and write the CSV file once
-#     folder_path = output_dir
-#
-#     # Concatenate all DataFrames into a single DataFrame
-#     final_df = pd.concat(all_dfs, ignore_index=True)
-#
-#     # Save the final DataFrame to CSV
-#     csv_file_path = os.path.join(folder_path, Checklist_file)
-#     final_df.to_csv(csv_file_path, index=False)
-
-
-# fetch_all_CheckList_data()
-# generate_update_schema()
-# upload_csv()

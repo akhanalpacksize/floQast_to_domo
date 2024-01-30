@@ -1,0 +1,8 @@
+from all_pull_checklist import fetch_all_Checklists_data_parallel
+from all_pull_reconciliations import fetch_all_reconciliations_data_parallel
+from upload_to_azure import upload_all_files_to_azure_blob
+
+
+fetch_all_Checklists_data_parallel()
+fetch_all_reconciliations_data_parallel()
+upload_all_files_to_azure_blob()

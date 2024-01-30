@@ -4,8 +4,8 @@ output_json = 'FloQast_json'
 
 
 # CSV FILE NAME
-Checklist_file = 'Checklist_file.csv'
-Reconciliations = 'Reconciliations.csv'
+Checklist_file = 'floqast_checklist.csv'
+Reconciliations = 'floqast_reconciliations.csv'
 
 
 # DATASET OWNER_ID

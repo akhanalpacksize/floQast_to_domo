@@ -92,7 +92,7 @@ def upload_csv():
     # Get current working directory
     current_directory = os.getcwd()
 
-    # Construct the path to the CSV file within the "jaccard_index_csv_data" directory
+    # Construct the path to the CSV file within the "FloQast" directory
     csv_path = os.path.join(current_directory, output_dir, Checklist_file)
 
     # Check if the CSV file exists
