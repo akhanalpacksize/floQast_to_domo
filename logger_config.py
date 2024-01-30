@@ -1,6 +1,9 @@
 import os
 import json
 import logging.config
+from utils import create_folder_if_does_not_exist
+
+create_folder_if_does_not_exist('logs')
 
 
 def setup_logging(
@@ -28,3 +31,4 @@ def setup_logging(
         logging.config.dictConfig(config)
     else:
         logging.basicConfig(level=default_level)
+

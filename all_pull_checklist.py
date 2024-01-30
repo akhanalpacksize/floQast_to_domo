@@ -5,8 +5,6 @@ import datetime
 import pandas as pd
 import concurrent.futures
 from logger_config import setup_logging
-from dateutil.relativedelta import relativedelta
-
 from config.env import flo_base, access_token
 from commons import output_dir, Checklist_file
 from json_to_csv import json_to_dataframe
@@ -15,7 +13,7 @@ from upload_csv_to_dataset_checklist import generate_update_schema, upload_csv
 pd.set_option('display.max_columns', None)
 pd.set_option('display.expand_frame_repr', False)
 
-setup_logging(module_name="create_dataset")
+setup_logging(module_name="floqast_data_pull")
 
 logger = logging.getLogger(__name__)
 

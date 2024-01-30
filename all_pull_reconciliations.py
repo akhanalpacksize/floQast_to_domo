@@ -12,7 +12,7 @@ from commons import output_dir, Reconciliations
 from upload_csv_to_dataset_reconciliation import generate_update_schema, upload_csv
 
 # Setup logging
-setup_logging(module_name="create_dataset")
+setup_logging(module_name="floqast_data_pull")
 
 logger = logging.getLogger(__name__)
 
