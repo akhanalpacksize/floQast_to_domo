@@ -170,3 +170,4 @@ azure_devops_csv_data
 .DS_Store/
 .DS_Store
 FloQast_dir
+log_csv_dir

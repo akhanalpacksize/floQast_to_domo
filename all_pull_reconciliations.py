@@ -55,6 +55,7 @@ def fetch_all_reconciliations_data_parallel():
         # Collect the results and filter out None values
         all_dfs.extend([df for df in dfs if df is not None])
 
+
     folder_path = output_dir
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
