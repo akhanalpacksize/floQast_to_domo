@@ -74,7 +74,7 @@ def generate_update_schema():
 
     updated_schema_column = generate_schema_columns(headers)
 
-    dataset_name = "DataSet Summary"
+    dataset_name = "FloQast"
     try:
         # UPDATE DATASET FOR DOMO
         update_schema(dataset_name, updated_schema_column, access_token)
