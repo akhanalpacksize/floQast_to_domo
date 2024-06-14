@@ -24,7 +24,7 @@ base_url = flo_base
 
 
 def fetch_data_for_month(month, base_url, access_token):
-    url = f'{base_url}/checklists?filter[month]={month.strftime("%B")}&filter[year]={month.year}'
+    url = f'{base_url}/analytics/checklists?filter[month]={month.strftime("%B")}&filter[year]={month.year}'
 
     headers = {'x-api-key': access_token}
 
